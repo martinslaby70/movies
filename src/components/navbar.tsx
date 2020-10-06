@@ -4,7 +4,7 @@ const Navbar = () => {
     return (
         <header>
             <div>
-               <a href="/portfolio" className='link'>Back to portfolio</a>
+               <a href="/" className='link'>Back to portfolio</a>
             </div>   
         </header>
     );  

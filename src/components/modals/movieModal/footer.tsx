@@ -8,7 +8,7 @@ interface props {
     movie: movieDescription,
     close: () => void
 }
-const Footer = ({movie, close}: props): JSX.Element => {
+const Footer = ({movie, close}: props): JSX.Element | null => {
 
     const {isVisible} = useContext(ModalContext)!;
     const {movies, addMovie, removeMovie} = useContext(MovieContext)!;
@@ -21,27 +21,21 @@ const Footer = ({movie, close}: props): JSX.Element => {
             if(item.imdbID === movie.imdbID)
                 toggle(true);
         })
-    },[movies, isVisible]);
+    },[movies, isVisible, movie.imdbID]);
     
-    const buttons = isAdded ? (
-        <div className="movieModalButtons">
+    const addButton = isAdded ? (      
             <Button onClick={() => removeMovie(movie.imdbID)}>Remove from my list</Button>
-            <Button href={`https://www.google.com/search?q=where+to+watch+${movie.Title}+online`} target="_blank">Watch <span>{movie.Title}</span> online</Button>
-            <Button onClick={close}>close</Button>
-        </div>
     ):(
-        <div className="movieModalButtons">
             <Button onClick={() => addMovie(movie) } >Add to my List</Button>
-            <Button href={`https://www.google.com/search?q=where+to+watch+${movie.Title}+online`} target="_blank">Watch <span>{movie.Title}</span> online</Button>
-            <Button onClick={close}>close</Button>
-        </div>  
     );
     
     return movie.Poster ? (
-        <div>
-            {buttons}
+        <div className="movieModalButtons">
+            {addButton}
+            <Button href={`https://www.google.com/search?q=where+to+watch+${movie.Title}+online`} target="_blank">Watch <span>{movie.Title}</span> online</Button>
+            <Button onClick={close}>close</Button>
         </div>
-    ):(<div />)
+    ):null
 }
 
 export default Footer;

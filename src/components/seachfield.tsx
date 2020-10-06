@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
 
 import FilmInsinuator from './filmInsinuator';
@@ -9,7 +9,6 @@ import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faSearchMinus } from '@fortawesome/free-solid-svg-icons'
-import { v4 as uuid} from 'uuid';
 
 import './../scss/searchfield.scss'
 
@@ -25,9 +24,7 @@ const Searchfield = ({modalSearchString}: props) => {
     const [movieType, setMovieType] = useState<string>('');
     const [focus, setFocus] = useState<boolean>(true);
     
-    const handleChange = (movieType: string) => setMovieType(movieType);
-    const searchfieldRef = useRef<HTMLDivElement>(null);
-    
+    const handleChange = (movieType: string) => setMovieType(movieType);   
     
     useEffect(() => {
         if (searchString.length >= 3 && searchString[searchString.length - 1] !== ' ')
@@ -51,19 +48,15 @@ const Searchfield = ({modalSearchString}: props) => {
     }   
     const handleBlur = () => {
         setTimeout(() => {
-            console.log(document.activeElement);
             
             if (document.activeElement === document.body)
-            {
                 setFocus(false);
-            }
-            
-            //setFocus(false);
+
         }, 100)
     }; 
 
     return(
-        <div className="searchfield" onFocus={() => setFocus(true)} onBlur={handleBlur} ref={searchfieldRef}>
+        <div className="searchfield" onFocus={() => setFocus(true)} onBlur={handleBlur}>
             <div className='searchbar'>
                 
                 <DropdownButton id="dropdown-basic-button" title={movieType === '' ? 'All' : movieType.charAt(0).toUpperCase() + movieType.slice(1)} >
@@ -77,7 +70,7 @@ const Searchfield = ({modalSearchString}: props) => {
                 <button type="submit" onClick={() => handleSearchButton()}><FontAwesomeIcon icon={searchString.length >= 3 ? faSearch : faSearchMinus} /></button>
             </div>
 
-           { focus ? <FilmInsinuator movies={searchInsinuator} key={uuid()}/> : null}
+           { focus ? <FilmInsinuator movies={searchInsinuator} /> : null}
             
             
         </div>

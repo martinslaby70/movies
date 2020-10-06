@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
+import {v4 as uuid} from 'uuid';
 
 interface props {
     page: number,
@@ -16,7 +17,7 @@ const Footer = ({page,setPage,totalResults, close}: props) => {
     
     const activeNums = paginate({currentPage:page, totalItems:pages}).map(number => {
         return(
-            <Button onClick={() => setPage(number)} variant='secondary' className={number === page ? 'num active' : 'num'} >{number}</Button>
+            <Button onClick={() => setPage(number)} variant='secondary' className={number === page ? 'num active' : 'num'} key={uuid()}>{number}</Button>
         );
     });
     

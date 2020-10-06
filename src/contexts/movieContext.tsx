@@ -1,4 +1,4 @@
-import React, {createContext, useEffect, useState} from 'react'
+import React, {createContext, useState} from 'react'
 import movieDescription from '../interfaces/movieDescription';
 import MovieDescription from '../interfaces/movieDescription'
 
