@@ -26,7 +26,7 @@ const MovieModal = ({modalSearchString, isVisible, hide}: props) => {
     
     useEffect(() => {     
     
-        Axios.get(`http://omdbapi.com/?apikey=${KEY}&s=${modalSearchString}&page=${page.toString()}`)
+        Axios.get(`https://omdbapi.com/?apikey=${KEY}&s=${modalSearchString}&page=${page.toString()}`)
         .then(res => {
           setMovies(res.data.Search);     
           setTotalMovieResults(res.data.totalResults);             

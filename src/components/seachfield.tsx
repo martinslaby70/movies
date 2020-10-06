@@ -30,7 +30,7 @@ const Searchfield = ({modalSearchString}: props) => {
     
     useEffect(() => {
         if (searchString.length >= 3 && searchString[searchString.length - 1] !== ' ')
-            Axios.get(`http://omdbapi.com/?apikey=${KEY}&s=${searchString}&type=${movieType}`)
+            Axios.get(`https://omdbapi.com/?apikey=${KEY}&s=${searchString}&type=${movieType}`)
             .then(res => { 
                 if(res.data.Search)                
                     setSearchInsinuator(res.data.Search);

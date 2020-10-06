@@ -22,7 +22,7 @@ const MovieModal = () => {
      if(Object.keys(localStorage).includes(movieId))
         setMovieDescription(JSON.parse(localStorage.getItem(movieId)!));      
      else 
-        Axios.get(`http://omdbapi.com/?apikey=${KEY}&i=${movieId}&plot=full`)
+        Axios.get(`https://omdbapi.com/?apikey=${KEY}&i=${movieId}&plot=full`)
         .then(res => {
           setMovieDescription(res.data);            
         });   
