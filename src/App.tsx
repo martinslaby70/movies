@@ -34,18 +34,23 @@ const App = () => {
 
   return (
     <div className="App">
-      <Navbar />
+     
 
       <MovieContexProvider>    
         <ModalContexProvider>    
-          
-          <Searchfield modalSearchString={setSearchString} />
-          <MovieList  />
-      
-          <Footer />
+          <div className="push">
 
-          <MovieModal  />
-          <SearchModal modalSearchString={searchString} hide={hide} isVisible={isVisible}/>
+            <Navbar />
+            
+            <Searchfield modalSearchString={setSearchString} />
+            <MovieList  />
+
+            <MovieModal  />
+            <SearchModal modalSearchString={searchString} hide={hide} isVisible={isVisible}/>
+
+          </div>
+        
+          <Footer />
 
         </ModalContexProvider>
       </MovieContexProvider>

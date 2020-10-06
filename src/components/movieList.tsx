@@ -16,7 +16,7 @@ const MovieList = () => {
        
         return(     
             <div className="imageBox" onClick={() => setMovieId(movie.imdbID)} key={uuid()}>               
-                <img src={poster} alt="" />
+                <img src={poster} alt="movie poster" />
                 <div className="middle">
                     <h4>{movie.Title}</h4>
                     <p>{movie.Genre}</p>

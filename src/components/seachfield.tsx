@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import Axios from 'axios';
 
 import FilmInsinuator from './filmInsinuator';
@@ -13,6 +13,7 @@ import { v4 as uuid} from 'uuid';
 
 import './../scss/searchfield.scss'
 
+
 interface props {
     modalSearchString: (movieId: string) => void
 }
@@ -25,7 +26,7 @@ const Searchfield = ({modalSearchString}: props) => {
     const [focus, setFocus] = useState<boolean>(true);
     
     const handleChange = (movieType: string) => setMovieType(movieType);
-    
+    const searchfieldRef = useRef<HTMLDivElement>(null);
     
     
     useEffect(() => {
@@ -50,12 +51,19 @@ const Searchfield = ({modalSearchString}: props) => {
     }   
     const handleBlur = () => {
         setTimeout(() => {
-            setFocus(false);
+            console.log(document.activeElement);
+            
+            if (document.activeElement === document.body)
+            {
+                setFocus(false);
+            }
+            
+            //setFocus(false);
         }, 100)
     }; 
 
     return(
-        <div className="searchfield" onFocus={() => setFocus(true)} onBlur={handleBlur}>
+        <div className="searchfield" onFocus={() => setFocus(true)} onBlur={handleBlur} ref={searchfieldRef}>
             <div className='searchbar'>
                 
                 <DropdownButton id="dropdown-basic-button" title={movieType === '' ? 'All' : movieType.charAt(0).toUpperCase() + movieType.slice(1)} >
@@ -65,7 +73,7 @@ const Searchfield = ({modalSearchString}: props) => {
                     <Dropdown.Item onClick={() => handleChange('episode')}>Episode</Dropdown.Item>
                 </DropdownButton>
 
-                <input type="text" placeholder="Search for films" onChange={ (event) => setSearchString(event.target.value)}/>
+                <input id="ss" type="text" placeholder="Search for films" onChange={ (event) => setSearchString(event.target.value)}/>
                 <button type="submit" onClick={() => handleSearchButton()}><FontAwesomeIcon icon={searchString.length >= 3 ? faSearch : faSearchMinus} /></button>
             </div>
 
