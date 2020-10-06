@@ -1,24 +1,56 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from 'react';
+import Navbar from './components/navbar';
+import Searchfield from './components/seachfield';
+import Footer from './components/footer';
 
-function App() {
+import {MovieContexProvider} from './contexts/movieContext';
+import {ModalContexProvider} from './contexts/modalContext';
+
+import MovieModal from './components/modals/movieModal/movieModal';
+import SearchModal from './components/modals/searchModal/searchModal';
+import MovieList from './components/movieList';
+
+
+
+
+
+const App = () => {
+
+  //search modal setup
+  const [isVisible, setVisibility] = useState<boolean>(false);
+  const [searchString, setSearchString] = useState<string>('');
+
+  const hide = () => {
+    setSearchString('');
+    setVisibility(false);
+  }
+  const show = () => setVisibility(true);
+
+  useEffect(() => {
+    if (searchString !== '')
+      show();
+  },[searchString])
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
+
+      <MovieContexProvider>    
+        <ModalContexProvider>    
+          
+          <Searchfield modalSearchString={setSearchString} />
+          <MovieList  />
+      
+          <Footer />
+
+          <MovieModal  />
+          <SearchModal modalSearchString={searchString} hide={hide} isVisible={isVisible}/>
+
+        </ModalContexProvider>
+      </MovieContexProvider>
+
+      
     </div>
   );
 }

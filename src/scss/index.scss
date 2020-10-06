@@ -1,0 +1,60 @@
+@import "./assests/colors.scss";
+
+html, body {
+  margin: 0;
+  background-color: $background !important;
+  height: 100%;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+header {
+  width: 100vw;
+  height: 80px;  
+  display: block;
+  background: linear-gradient(black, colors 100%);
+
+  a{
+    padding: 15px;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    width: 100%;
+    text-align: center;
+    display: block;
+  }
+}
+
+.footer{
+  
+  width: 100%;
+  margin-top: 50px;
+  background-color: rgb(14, 14, 14);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  p, a {
+    margin: 0;
+    padding: 10px;
+  }
+}
+.link{
+  color: $link-text;
+  transition: all ease .2s;
+  cursor: pointer;
+  &:hover{
+    text-decoration: none;
+    color: rgba($link-text,.5);
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  .footer{
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 380px) {
+  .footer{
+    font-size: 8px;
+  }
+}
+

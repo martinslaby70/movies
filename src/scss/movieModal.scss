@@ -1,0 +1,121 @@
+@import "./assests/colors.scss";
+
+.modal-content {
+    background-color: rgba($movieBackground, .98) !important;
+    color: white;
+
+    h2 {
+        color: $text-color;
+    }
+
+    .modal-body {
+        div {
+            .content-left {
+                display: block;
+                width: 30%;
+                float: left;
+                overflow: hidden;
+
+                img {
+                    width: 90%;
+                    padding: 5%;
+                    
+                }
+            }
+
+            .content-right {
+                p{
+                    color: $text-color;
+                    span {
+                        color: white;
+                    }
+                }
+
+                ul {
+                    list-style: none;
+                    padding: 0;
+                    color: $text-color;
+
+                    li {
+                        span {
+                            margin-left: 10px;
+                            color: white;
+                        }
+
+                    }
+                }
+            }
+        }
+
+    }
+
+    .modal-footer {
+        border: none;
+
+        button, a {
+            background-color: $background;
+            border-color: $text-color;
+            margin-left: 10px;
+
+            span {
+                color: $text-color;
+            }
+
+            &:active {
+                background-color: $text-color !important;
+                border-color: $text-color !important;
+
+                span {
+                    color: white;
+                }
+            }
+
+            &:focus {
+                box-shadow: 0 0 0 0.2rem rgba($link-text, .2) !important;
+            }
+
+            &:hover:not(.active) {
+                background-color: rgba($text-color, .5);
+            }
+            &.active{
+                background-color: $text-color !important;
+                border-color: $text-color !important;
+                background-color: rgba($text-color, .9) !important;
+            }
+            &:last-child{
+                background-color: rgba(109, 24, 24, 0.316);
+                color: red;
+                border-color: red;
+                width: 100%;
+                display: none;
+            }
+        }
+        
+
+    }
+}
+@media only screen and (max-width: 900px) {
+    p, li{
+        font-size: 12px;
+    }
+  }
+@media only screen and (max-width: 540px) {
+    p, li{
+        font-size: 10px;
+    }
+    .movieModalButtons{
+        button, a{
+            margin: 0 0 10px 0 !important;
+            font-size: 13px !important;
+            width: 100%;
+            &:last-child{
+                display: block !important;
+            }
+        }
+    }
+    .modal-footer{
+        div{
+            width: 100%;
+        }
+    }
+  }
