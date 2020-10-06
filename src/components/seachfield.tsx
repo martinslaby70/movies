@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
 
 import FilmInsinuator from './filmInsinuator';
@@ -9,6 +9,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faSearchMinus } from '@fortawesome/free-solid-svg-icons'
+import { v4 as uuid} from 'uuid';
 
 import './../scss/searchfield.scss'
 
@@ -68,7 +69,7 @@ const Searchfield = ({modalSearchString}: props) => {
                 <button type="submit" onClick={() => handleSearchButton()}><FontAwesomeIcon icon={searchString.length >= 3 ? faSearch : faSearchMinus} /></button>
             </div>
 
-           { focus ? <FilmInsinuator movies={searchInsinuator}/> : null}
+           { focus ? <FilmInsinuator movies={searchInsinuator} key={uuid()}/> : null}
             
             
         </div>
