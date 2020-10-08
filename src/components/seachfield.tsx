@@ -67,7 +67,7 @@ const Searchfield = ({modalSearchString, inputRef}: props) => {
                     <Dropdown.Item onClick={() => handleChange('episode')}>Episode</Dropdown.Item>
                 </DropdownButton>
 
-                <input ref={inputRef} type="text" placeholder="Search for films" onChange={ (event) => setSearchString(event.target.value)}/>
+                <input autoFocus={true} ref={inputRef} type="text" placeholder="Search for films" onChange={ (event) => setSearchString(event.target.value)}/>
                 <button type="submit" onClick={() => handleSearchButton()}><FontAwesomeIcon icon={searchString.length >= 3 ? faSearch : faSearchMinus} /></button>
             </div>
 
