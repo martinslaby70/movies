@@ -13,7 +13,10 @@ import { ModalContext } from '../../../contexts/modalContext'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './../../../scss/movieModal.scss';
 
-const MovieModal = () => {
+interface props {
+  inputRef: React.MutableRefObject<HTMLInputElement | null> 
+}
+const MovieModal = ({inputRef}: props) => {
     
     const [movieDescription, setMovieDescription] = useState<movieDescription | null>(null);
     const {movieId,setMovieId, hide, isVisible} = useContext(ModalContext)!;
@@ -34,6 +37,8 @@ const MovieModal = () => {
       setMovieDescription(null);
       setMovieId('');
       hide();
+      if (inputRef.current)
+        inputRef.current.focus();
     } 
     
     return movieDescription ? (

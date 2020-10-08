@@ -15,9 +15,10 @@ import { ModalContext } from '../../../contexts/modalContext'
 interface props {
   modalSearchString: string,
   hide: () => void,
-  isVisible: boolean
+  isVisible: boolean,
+  inputRef: React.MutableRefObject<HTMLInputElement | null> 
 }
-const MovieModal = ({modalSearchString, isVisible, hide}: props) => {
+const MovieModal = ({modalSearchString, isVisible, hide, inputRef}: props) => {
     
     const [movies, setMovies] = useState<Movie[]>([]);
     const [page, setPage] = useState<number>(1);
@@ -38,6 +39,8 @@ const MovieModal = ({modalSearchString, isVisible, hide}: props) => {
       setPage(1);
       setTotalMovieResults(0);
       hide();
+      if (inputRef.current)
+        inputRef.current.focus();
     }
 
     const handleMovieClick = (movieId: string) => {

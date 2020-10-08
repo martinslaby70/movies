@@ -23,13 +23,16 @@ export const MovieContexProvider = ({children}: Props) => {
         let keys = Object.keys(localStorage);
         let i = keys.length;
 
+        let imdbId_regexMask = /ev\d{7}\/\d{4}(-\d)?|(ch|co|ev|nm|tt)\d{7}/;
         while (i--) {
-            if (localStorage.getItem(keys[i]) !== null)
+            
+            if (imdbId_regexMask.test(keys[i]))
             {
                 let movie = localStorage.getItem(keys[i]);
                 values.push(JSON.parse(movie!))
             }
         }
+
         return values;
     } 
 

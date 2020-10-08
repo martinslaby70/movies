@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Navbar from './components/navbar';
 import Searchfield from './components/seachfield';
 import Footer from './components/footer';
@@ -19,6 +19,7 @@ const App = () => {
   //search modal setup
   const [isVisible, setVisibility] = useState<boolean>(false);
   const [searchString, setSearchString] = useState<string>('');
+  const inputRef = useRef(null);
 
   const hide = () => {
     setSearchString('');
@@ -42,11 +43,11 @@ const App = () => {
 
             <Navbar />
             
-            <Searchfield modalSearchString={setSearchString} />
+            <Searchfield modalSearchString={setSearchString} inputRef={inputRef}/>
             <MovieList  />
 
-            <MovieModal  />
-            <SearchModal modalSearchString={searchString} hide={hide} isVisible={isVisible}/>
+            <MovieModal  inputRef={inputRef} />
+            <SearchModal modalSearchString={searchString} hide={hide} isVisible={isVisible} inputRef={inputRef}/>
 
           </div>
         

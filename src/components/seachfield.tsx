@@ -14,9 +14,10 @@ import './../scss/searchfield.scss'
 
 
 interface props {
-    modalSearchString: (movieId: string) => void
+    modalSearchString: (movieId: string) => void,
+    inputRef: React.MutableRefObject<HTMLInputElement | null> 
 }
-const Searchfield = ({modalSearchString}: props) => {
+const Searchfield = ({modalSearchString, inputRef}: props) => {
     
 
     const [searchInsinuator, setSearchInsinuator] = useState<Movie[]>([]);    
@@ -66,7 +67,7 @@ const Searchfield = ({modalSearchString}: props) => {
                     <Dropdown.Item onClick={() => handleChange('episode')}>Episode</Dropdown.Item>
                 </DropdownButton>
 
-                <input id="ss" type="text" placeholder="Search for films" onChange={ (event) => setSearchString(event.target.value)}/>
+                <input ref={inputRef} type="text" placeholder="Search for films" onChange={ (event) => setSearchString(event.target.value)}/>
                 <button type="submit" onClick={() => handleSearchButton()}><FontAwesomeIcon icon={searchString.length >= 3 ? faSearch : faSearchMinus} /></button>
             </div>
 
