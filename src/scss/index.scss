@@ -1,11 +1,14 @@
 @import "./assests/colors.scss";
 
 html, body {
+  scroll-behavior: smooth;
   margin: 0;
   background-color: $background !important;
   overflow-x: hidden;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none; 
 }
-::-webkit-scrollbar {
+::-webkit-scrollbar{
   display: none;
 }
 .push{
