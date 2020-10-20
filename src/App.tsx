@@ -23,7 +23,7 @@ const App = () => {
 
   const hide = () => {
     setSearchString('');
-    setVisibility(false);
+    setVisibility(false); 
   }
   const show = () => setVisibility(true);
 
