@@ -28,7 +28,7 @@ const Searchfield = ({modalSearchString, inputRef}: props) => {
     const handleChange = (movieType: string) => setMovieType(movieType);   
     
     useEffect(() => {
-        if (searchString.length >= 3 && searchString[searchString.length - 1] !== ' ')
+        if (searchString.length >= 3)
             Axios.get(`https://omdbapi.com/?apikey=${KEY}&s=${searchString}&type=${movieType}`)
             .then(res => { 
                 if(res.data.Search)                
@@ -38,11 +38,12 @@ const Searchfield = ({modalSearchString, inputRef}: props) => {
             })
             .catch(err => console.log(err));      
              
-        else if (searchString.length < 3)
+        else 
             setSearchInsinuator([]);  
 
     },[searchString, movieType]);
 
+   
     const handleSearchButton = () => {
         if (searchString.length >= 3)
             modalSearchString(searchString);
@@ -54,8 +55,14 @@ const Searchfield = ({modalSearchString, inputRef}: props) => {
                 setFocus(false);
 
         }, 100)
-    }; 
+    } 
+    const handleKeyPress = (event: React.KeyboardEvent) => {
+        if (event.key === 'Enter' && searchString.length >= 3)
+            modalSearchString(searchString);
+    }
 
+    
+    
     return(
         <div className="searchfield" onFocus={() => setFocus(true)} onBlur={handleBlur}>
             <div className='searchbar'>
@@ -67,14 +74,22 @@ const Searchfield = ({modalSearchString, inputRef}: props) => {
                     <Dropdown.Item onClick={() => handleChange('episode')}>Episode</Dropdown.Item>
                 </DropdownButton>
 
-                <input autoFocus={true} ref={inputRef} type="text" placeholder="Search for films" onChange={ (event) => setSearchString(event.target.value)}/>
+                <input 
+                    autoFocus={true} 
+                    ref={inputRef} 
+                    type="text" 
+                    placeholder="Search for films" 
+                    onChange={ (e) => setSearchString(e.target.value)} 
+                    onKeyPress={ (e) => handleKeyPress(e)}
+                />
+
                 <button type="submit" onClick={() => handleSearchButton()}><FontAwesomeIcon icon={searchString.length >= 3 ? faSearch : faSearchMinus} /></button>
             </div>
 
            { focus ? <FilmInsinuator movies={searchInsinuator} /> : null}
             
             
-        </div>
+        </div> 
         
     );
 }
