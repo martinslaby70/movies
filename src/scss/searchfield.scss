@@ -48,6 +48,7 @@
         width: 80%;
         padding-left: 2%;
         color: $background;
+        border-radius: 0px !important;
         &:focus{
           outline: none;
         }
