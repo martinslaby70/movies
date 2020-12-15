@@ -10,8 +10,11 @@
 
     .modal-body {
         div {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
             .content-left {
-                display: block;
+                
                 width: 30%;
                 float: left;
                 overflow: hidden;
@@ -24,9 +27,13 @@
             }
 
             .content-right {
+                flex-direction: column;
+                width: 70%;
                 p{
                     color: $text-color;
+                    margin: 10px;
                     span {
+                        margin-left: 10px;
                         color: white;
                     }
                 }
@@ -37,6 +44,7 @@
                     color: $text-color;
 
                     li {
+                        margin: 10px;
                         span {
                             margin-left: 10px;
                             color: white;
@@ -55,7 +63,7 @@
         button, a {
             background-color: $background;
             border-color: $text-color;
-            margin-left: 10px;
+            margin: 5px;
 
             span {
                 color: $text-color;

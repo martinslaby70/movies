@@ -10,7 +10,7 @@ const Footer = () => {
 
     return(
         <footer className="footer">         
-            <a href="www.martinslaby.cz" className="link">back to portfolio</a>
+            <a href="https://martinslaby.cz/" className="link">back to portfolio</a>
             <p>Martin Slabý &copy; 2020-{currentYear}</p>
             <p className="link" onClick={() => removeMovie('')}>clear whole list</p>
         </footer>

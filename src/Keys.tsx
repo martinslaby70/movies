@@ -1,3 +1,3 @@
-const KEY = "c605740";
+const movieAPIKEY= "c605740";
 
-export default KEY;
+export default movieAPIKEY;

@@ -7,17 +7,20 @@ html, body {
   overflow-x: hidden;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none; 
+
+  &::-webkit-scrollbar{
+    display: none;
+  }
 }
-::-webkit-scrollbar{
-  display: none;
-}
-.push{
-  min-height: 100vh !important;
-}
+
+
 header {
   width: 100vw;
   height: 80px;  
   display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
   background: linear-gradient(black, colors 100%);
 
   a{
@@ -31,15 +34,22 @@ header {
 
 .footer{
   width: 100%;
+  height: 45px;
   background-color: rgb(14, 14, 14);
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+
+  position: absolute;
+  bottom: -45px;
+  left: 0;
+
   p, a {
     margin: 0;
     padding: 10px;
   }
 }
+
 .link{
   color: $link-text;
   transition: all ease .2s;

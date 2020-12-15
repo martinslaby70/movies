@@ -1,16 +1,17 @@
 import React, {useContext, useEffect, useState} from 'react'
-
-import Modal from 'react-bootstrap/Modal'
-import Footer from './footer'
-import Body from './body'
-
 import Axios from 'axios'
 import KEY from '../../../Keys'
-
 import movieDescription from '../../../interfaces/movieDescription'
 import { ModalContext } from '../../../contexts/modalContext'
 
+//components
+import Footer from './footer'
+import Body from './body'
+
+//libaries
+import Modal from 'react-bootstrap/Modal'
 import 'bootstrap/dist/css/bootstrap.min.css';
+//scss
 import './../../../scss/movieModal.scss';
 
 interface props {

@@ -38,11 +38,13 @@ export const MovieContexProvider = ({children}: Props) => {
 
     const [movies, setMovies] = useState<MovieDescription[]>(defaultValue);
 
+
     const addMovie = (movieToAdd: MovieDescription) => {
         localStorage.setItem(movieToAdd.imdbID, JSON.stringify(movieToAdd));
         setMovies([...movies, movieToAdd]);
     }
     
+
     const removeMovie = (movieToRemove: string) => {
         if (movieToRemove === '')        
         {
@@ -59,6 +61,7 @@ export const MovieContexProvider = ({children}: Props) => {
         }
     }
 
+    
     return(
         <MovieContext.Provider value={{movies, addMovie, removeMovie}}>
             {children}

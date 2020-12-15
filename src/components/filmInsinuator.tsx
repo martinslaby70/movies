@@ -27,10 +27,11 @@ const FilmResult = ({movies}: props) => {
        );       
     });
    
+    const loading = <div>loading...</div>
    
     return (
         <div className='insinuator'>
-            {results}
+            {results ? results : loading}
         </div>
     )
 }

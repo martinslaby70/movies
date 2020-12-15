@@ -1,15 +1,16 @@
 import React, {useEffect, useRef, useState} from 'react';
-import Navbar from './components/navbar';
-import Searchfield from './components/seachfield';
-import Footer from './components/footer';
 
+//contexts
 import {MovieContexProvider} from './contexts/movieContext';
 import {ModalContexProvider} from './contexts/modalContext';
 
+//components
 import MovieModal from './components/modals/movieModal/movieModal';
 import SearchModal from './components/modals/searchModal/searchModal';
 import MovieList from './components/movieList';
-
+import Navbar from './components/navbar';
+import Searchfield from './components/seachfield';
+import Footer from './components/footer';
 
 
 
@@ -34,30 +35,33 @@ const App = () => {
 
 
   return (
-    <div className="App">
-     
-
       <MovieContexProvider>    
         <ModalContexProvider>    
-          <div className="push">
 
+          
+
+          <div className="push">
             <Navbar />
-            
             <Searchfield modalSearchString={setSearchString} inputRef={inputRef}/>
             <MovieList  />
-
-            <MovieModal  inputRef={inputRef} />
-            <SearchModal modalSearchString={searchString} hide={hide} isVisible={isVisible} inputRef={inputRef}/>
-
           </div>
-        
+
+
+          <MovieModal  
+            inputRef={inputRef} 
+          />
+
+          <SearchModal 
+            modalSearchString={searchString} 
+            hide={hide} 
+            isVisible={isVisible} 
+            inputRef={inputRef}
+          />
+
           <Footer />
 
         </ModalContexProvider>
       </MovieContexProvider>
-
-      
-    </div>
   );
 }
 
