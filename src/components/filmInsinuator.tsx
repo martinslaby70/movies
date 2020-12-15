@@ -5,12 +5,17 @@ import unknownMoviePoster from '../imgs/uknownFilm.jpg'
 import { ModalContext } from '../contexts/modalContext';
 import { v4 as uuid} from 'uuid';
 
+//libaries
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+
 const numberOfSearchResults = 8;
 interface props {
     movies: Movie[],
+    loading: boolean
 }
 
-const FilmResult = ({movies}: props) => {
+const FilmResult = ({movies, loading}: props) => {
 
     const {setMovieId} = useContext(ModalContext)!;
 
@@ -27,11 +32,13 @@ const FilmResult = ({movies}: props) => {
        );       
     });
    
-    const loading = <div>loading...</div>
+    const loadingAnim = <FontAwesomeIcon icon={faCircleNotch} spin />;
+      
+    
    
     return (
         <div className='insinuator'>
-            {results ? results : loading}
+            {loading ? loadingAnim : results}
         </div>
     )
 }

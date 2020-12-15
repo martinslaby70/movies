@@ -28,12 +28,14 @@ const Searchfield = ({modalSearchString, inputRef}: props) => {
     const [movieType, setMovieType] = useState('');
 
     const [focus, setFocus] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (movieType: string) => setMovieType(movieType);   
     
     useEffect(() => {
         if (searchString.length >= 3)
         {
+            setLoading(true);
             Axios.get(`https://omdbapi.com/?apikey=${movieAPIKEY}&s=${searchString}&type=${movieType}`)
             .then(res => { 
                 if(res.data.Search)                
@@ -42,6 +44,7 @@ const Searchfield = ({modalSearchString, inputRef}: props) => {
                     console.log(res); 
             })
             .catch(err => console.log(err));        
+            setLoading(false);
         } 
         else 
             setSearchInsinuator([]);  
@@ -94,7 +97,7 @@ const Searchfield = ({modalSearchString, inputRef}: props) => {
 
             </div>
 
-           { focus ? <FilmInsinuator movies={searchInsinuator}/> : null}
+           { focus ? <FilmInsinuator movies={searchInsinuator} loading={loading} /> : null}
             
             
         </div> 

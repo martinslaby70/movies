@@ -76,6 +76,11 @@
     overflow: hidden;
     transition: all ease-in-out .4s;
     
+    svg{
+      margin-top: 50px;
+      width: 100%;
+      height: 50px;
+    }
 
     .insinuatorBar{
       background-color: rgba($movieBackground , .98);
