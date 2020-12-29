@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { MovieContext } from '../../../contexts/movieContext'
 import movieDescription from '../../../interfaces/movieDescription'
 import Button from 'react-bootstrap/Button';
-import { ModalContext } from '../../../contexts/modalContext';
+import { MovieModalContext } from '../../../contexts/movieModalContext';
 
 interface props {
     movie: movieDescription,
@@ -10,7 +10,7 @@ interface props {
 }
 const Footer = ({movie, close}: props): JSX.Element | null => {
 
-    const {isVisible} = useContext(ModalContext)!;
+    const {isVisible} = useContext(MovieModalContext)!;
     const {movies, addMovie, removeMovie} = useContext(MovieContext)!;
 
     const [isAdded, toggle] = useState<boolean>(false);

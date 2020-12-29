@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react'
 import Axios from 'axios'
 import KEY from '../../../Keys'
 import movieDescription from '../../../interfaces/movieDescription'
-import { ModalContext } from '../../../contexts/modalContext'
+import { MovieModalContext } from '../../../contexts/movieModalContext'
 
 //components
 import Footer from './footer'
@@ -20,7 +20,7 @@ interface props {
 const MovieModal = ({inputRef}: props) => {
     
     const [movieDescription, setMovieDescription] = useState<movieDescription | null>(null);
-    const {movieId,setMovieId, hide, isVisible} = useContext(ModalContext)!;
+    const {movieId,setMovieId, hide, isVisible} = useContext(MovieModalContext)!;
     
     useEffect(() => {     
      if(Object.keys(localStorage).includes(movieId))

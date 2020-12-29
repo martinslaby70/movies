@@ -1,7 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import Axios from 'axios';
 import movieAPIKEY from '../Keys';
 import Movie from '../interfaces/Movie';
+
+//contexts
+import { SearchModalContext } from '../contexts/searchModalContext';
 
 //compoentnts
 import FilmInsinuator from './filmInsinuator';
@@ -16,22 +19,24 @@ import { faSearch, faSearchMinus } from '@fortawesome/free-solid-svg-icons'
 import './../scss/searchfield.scss'
 
 
+
 interface props {
-    modalSearchString: (movieId: string) => void,
     inputRef: React.MutableRefObject<HTMLInputElement | null> 
 }
-const Searchfield = ({modalSearchString, inputRef}: props) => {
+const Searchfield = ({inputRef}: props) => {
     
-
+    // input states
     const [searchInsinuator, setSearchInsinuator] = useState<Movie[]>([]);    
     const [searchString, setSearchString] = useState('');
     const [movieType, setMovieType] = useState('');
 
+    // action states
     const [focus, setFocus] = useState(true);
     const [loading, setLoading] = useState(false);
 
-    const handleChange = (movieType: string) => setMovieType(movieType);   
-    
+    // contexts
+    const {setModalSearchString} = useContext(SearchModalContext)!;
+
     useEffect(() => {
         if (searchString.length >= 3)
         {
@@ -47,14 +52,18 @@ const Searchfield = ({modalSearchString, inputRef}: props) => {
             setLoading(false);
         } 
         else 
-            setSearchInsinuator([]);  
+            if (searchInsinuator !== [])
+                setSearchInsinuator([]);  
 
     },[searchString, movieType]);
 
-   
-    const handleSearchButton = () => {
-        if (searchString.length >= 3)
-            modalSearchString(searchString);
+    const handleTypeChange = (movieType: string) => setMovieType(movieType);   
+
+    const handleSearchButton = (event?: React.KeyboardEvent) => {
+        if (event?.key === 'Enter' && searchString.length >= 3)
+            setModalSearchString(searchString);
+        else if (!event && searchString.length >= 3)
+            setModalSearchString(searchString);
     }   
 
     const handleBlur = () => {
@@ -63,23 +72,16 @@ const Searchfield = ({modalSearchString, inputRef}: props) => {
                 setFocus(false);
         }, 100)
     } 
-
-    const handleKeyPress = (event: React.KeyboardEvent) => {
-        if (event.key === 'Enter' && searchString.length >= 3)
-            modalSearchString(searchString);
-    }
-
-    
     
     return(
         <div className="searchfield" onFocus={() => setFocus(true)} onBlur={handleBlur}>
             <div className='searchbar'>
                 
                 <DropdownButton id="dropdown-basic-button" title={movieType === '' ? 'All' : movieType.charAt(0).toUpperCase() + movieType.slice(1)} >
-                    <Dropdown.Item onClick={() => handleChange('')}>All</Dropdown.Item>
-                    <Dropdown.Item onClick={() => handleChange('movie')}>Movie</Dropdown.Item>
-                    <Dropdown.Item onClick={() => handleChange('series')}>Series</Dropdown.Item>
-                    <Dropdown.Item onClick={() => handleChange('episode')}>Episode</Dropdown.Item>
+                    <Dropdown.Item onClick={() => handleTypeChange('')}>All</Dropdown.Item>
+                    <Dropdown.Item onClick={() => handleTypeChange('movie')}>Movie</Dropdown.Item>
+                    <Dropdown.Item onClick={() => handleTypeChange('series')}>Series</Dropdown.Item>
+                    <Dropdown.Item onClick={() => handleTypeChange('episode')}>Episode</Dropdown.Item>
                 </DropdownButton>
 
                 <input 
@@ -88,7 +90,7 @@ const Searchfield = ({modalSearchString, inputRef}: props) => {
                     type="text" 
                     placeholder="Search for films" 
                     onChange={ (e) => setSearchString(e.target.value)} 
-                    onKeyPress={ (e) => handleKeyPress(e)}
+                    onKeyPress={ (e) => handleSearchButton(e)}
                 />
 
                 <button type="submit" onClick={() => handleSearchButton()}>

@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import { MovieContext } from '../contexts/movieContext'
-import { ModalContext } from '../contexts/modalContext'
+import { MovieModalContext } from '../contexts/movieModalContext'
 import {v4 as uuid} from 'uuid';
 
 import unknownMoviePoster from '../imgs/uknownFilm.jpg'
@@ -9,7 +9,7 @@ import './../scss/movieList.scss'
 
 const MovieList = () => {
     const {movies} = useContext(MovieContext)!;
-    const {setMovieId} = useContext(ModalContext)!;
+    const {setMovieId} = useContext(MovieModalContext)!;
 
     const myList = movies.map(movie => {
         let poster = movie.Poster !== 'N/A' ? (movie.Poster):(unknownMoviePoster);

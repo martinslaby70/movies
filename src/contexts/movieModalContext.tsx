@@ -9,13 +9,13 @@ interface ModalContextType {
     setMovieId: (id: string) => void
 }
 
-export const ModalContext = createContext<ModalContextType | null>(null);
+export const MovieModalContext = createContext<ModalContextType | null>(null);
 
 
 interface Props {
     children: React.ReactNode
 }
-export const ModalContexProvider = ({children}: Props) => {
+export const MovieModalContexProvider = ({children}: Props) => {
     
    
     const [isVisible, setVisibility] = useState<boolean>(false);
@@ -29,10 +29,18 @@ export const ModalContexProvider = ({children}: Props) => {
             show(); 
     },[movieId])
 
+    const values = {
+        isVisible,
+        movieId,
+        show,
+        hide,
+        setMovieId
+    }
+
     return(
-        <ModalContext.Provider value={{isVisible, show, hide, movieId, setMovieId}}>
+        <MovieModalContext.Provider value={values}>
             {children}
-        </ModalContext.Provider>
+        </MovieModalContext.Provider>
     );
 
 }

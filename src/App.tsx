@@ -1,8 +1,9 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef} from 'react';
 
 //contexts
 import {MovieContexProvider} from './contexts/movieContext';
-import {ModalContexProvider} from './contexts/modalContext';
+import {MovieModalContexProvider} from './contexts/movieModalContext';
+import {SearchModalContexProvider} from './contexts/searchModalContext';
 
 //components
 import MovieModal from './components/modals/movieModal/movieModal';
@@ -16,51 +17,26 @@ import Footer from './components/footer';
 
 
 const App = () => {
-
-  //search modal setup
-  const [isVisible, setVisibility] = useState<boolean>(false);
-  const [searchString, setSearchString] = useState<string>('');
+  
   const inputRef = useRef(null);
-
-  const hide = () => {
-    setSearchString('');
-    setVisibility(false); 
-  }
-  const show = () => setVisibility(true);
-
-  useEffect(() => {
-    if (searchString !== '')
-      show();
-  },[searchString])
-
 
   return (
       <MovieContexProvider>    
-        <ModalContexProvider>    
-
-          
-
-          <div className="push">
+        <MovieModalContexProvider>   
+          <SearchModalContexProvider>
+             
             <Navbar />
-            <Searchfield modalSearchString={setSearchString} inputRef={inputRef}/>
+
+            <Searchfield inputRef={inputRef}/>
             <MovieList  />
-          </div>
 
+            <MovieModal inputRef={inputRef} />
+            <SearchModal inputRef={inputRef} /> 
 
-          <MovieModal  
-            inputRef={inputRef} 
-          />
+            <Footer />
 
-          <SearchModal 
-            modalSearchString={searchString} 
-            hide={hide} 
-            isVisible={isVisible} 
-            inputRef={inputRef}
-          />
-
-          <Footer />
-
-        </ModalContexProvider>
+          </SearchModalContexProvider>
+        </MovieModalContexProvider>
       </MovieContexProvider>
   );
 }

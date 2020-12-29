@@ -2,7 +2,7 @@ import React, {useContext} from 'react'
 
 import Movie from '../interfaces/Movie';
 import unknownMoviePoster from '../imgs/uknownFilm.jpg'
-import { ModalContext } from '../contexts/modalContext';
+import { MovieModalContext } from '../contexts/movieModalContext';
 import { v4 as uuid} from 'uuid';
 
 //libaries
@@ -17,7 +17,7 @@ interface props {
 
 const FilmResult = ({movies, loading}: props) => {
 
-    const {setMovieId} = useContext(ModalContext)!;
+    const {setMovieId} = useContext(MovieModalContext)!;
 
     const results = movies.slice(0, numberOfSearchResults).map(movie => {
         return(

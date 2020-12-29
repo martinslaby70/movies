@@ -10,20 +10,21 @@ import Movie from './../../../interfaces/Movie'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './../../../scss/searchModal.scss';
-import { ModalContext } from '../../../contexts/modalContext'
+import { MovieModalContext } from '../../../contexts/movieModalContext'
+import { SearchModalContext } from '../../../contexts/searchModalContext'
 
 interface props {
-  modalSearchString: string,
-  hide: () => void,
-  isVisible: boolean,
   inputRef: React.MutableRefObject<HTMLInputElement | null> 
 }
-const MovieModal = ({modalSearchString, isVisible, hide, inputRef}: props) => {
+const MovieModal = ({inputRef}: props) => {
     
     const [movies, setMovies] = useState<Movie[]>([]);
     const [page, setPage] = useState<number>(1);
     const [totalMovieResults, setTotalMovieResults] = useState<number>(0);
-    const {setMovieId} = useContext(ModalContext)!;
+
+    //contexts
+    const {setMovieId} = useContext(MovieModalContext)!;
+    const {modalSearchString, isVisible, hide} = useContext(SearchModalContext)!;
     
     useEffect(() => {     
     
