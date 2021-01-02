@@ -1,45 +1,55 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import Movie from '../interfaces/Movie';
 import unknownMoviePoster from '../imgs/uknownFilm.jpg'
 import { MovieModalContext } from '../contexts/movieModalContext';
 import { v4 as uuid } from 'uuid';
 
-// FA
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 
 const numberOfSearchResults = 8;
+
 interface props {
-    movies: Movie[],
-    loading: boolean
+    movies: Movie[]
 }
+const FilmResult = ({movies}: props) => {
 
-const FilmResult = ({movies, loading}: props) => {
-
-    const {setMovieId} = useContext(MovieModalContext)!;
-
-    const results = movies.slice(0, numberOfSearchResults).map(movie => {
-        return(
-            <div className="insinuatorBar" onClick={() => setMovieId(movie.imdbID)} key={uuid()}>
-                <img src={movie.Poster === "N/A" ? (unknownMoviePoster) : (movie.Poster)} alt=""/>
-                <ul>
-                    <li>{movie.Title}</li>
-                    <li><span className="grey">({movie.Year})</span></li>
-                    <li>{movie.Type}</li>
-                </ul>
-            </div>
-       );       
-    });
-   
-    const loadingAnim = <FontAwesomeIcon icon={faCircleNotch} spin />;
-      
+    const results = movies.slice(0, numberOfSearchResults).map(movie => <Film movie={movie}/>);
     
    
     return (
         <div className='insinuator'>
-            {loading ? loadingAnim : results}
+            {results}
         </div>
     )
+}
+
+
+
+interface movieProps{
+    movie: Movie
+}
+const Film = ({movie}: movieProps) => {
+
+    const {setMovieId} = useContext(MovieModalContext)!;
+
+    return movie.Poster ? (
+        <div className="insinuatorBar" onClick={() => setMovieId(movie.imdbID)} key={uuid()}>
+            <img src={movie.Poster === "N/A" ? (unknownMoviePoster) : (movie.Poster)} alt={movie.Title + '- Poster'}/>
+            <ul>
+                <li>{movie.Title}</li>
+                <li><span className="grey">({movie.Year})</span></li>
+                <li>{movie.Type}</li>
+            </ul>
+        </div>
+   ):(
+    <div className="insinuatorBar" key={uuid()}>
+        <img src={unknownMoviePoster} alt="Movie poster"/>
+        <ul>
+            <li>asd</li>
+            <li><span className="grey">XXXX</span></li>
+            <li>asdasd</li>
+        </ul>
+    </div>
+   )
 }
 
 export default FilmResult;

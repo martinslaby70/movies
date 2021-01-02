@@ -32,7 +32,7 @@ const Searchfield = ({inputRef}: props) => {
 
     // action states
     const [focus, setFocus] = useState(true);
-    const [loading, setLoading] = useState(false);
+ 
 
     // contexts
     const {setModalSearchString} = useContext(SearchModalContext)!;
@@ -40,7 +40,6 @@ const Searchfield = ({inputRef}: props) => {
     useEffect(() => {
         if (searchString.length >= 3)
         {
-            setLoading(true);
             Axios.get(`https://omdbapi.com/?apikey=${movieAPIKEY}&s=${searchString}&type=${movieType}`)
             .then(res => { 
                 if(res.data.Search)                
@@ -49,7 +48,6 @@ const Searchfield = ({inputRef}: props) => {
                     console.log(res); 
             })
             .catch(err => console.log(err));        
-            setLoading(false);
         } 
         else 
             if (searchInsinuator !== [])
@@ -57,7 +55,6 @@ const Searchfield = ({inputRef}: props) => {
 
     },[searchString, movieType]);
 
-    const handleTypeChange = (movieType: string) => setMovieType(movieType);   
 
     const handleSearchButton = (event?: React.KeyboardEvent) => {
         if (event?.key === 'Enter' && searchString.length >= 3)
@@ -78,10 +75,10 @@ const Searchfield = ({inputRef}: props) => {
             <div className='searchbar'>
                 
                 <DropdownButton id="dropdown-basic-button" title={movieType === '' ? 'All' : movieType.charAt(0).toUpperCase() + movieType.slice(1)} >
-                    <Dropdown.Item onClick={() => handleTypeChange('')}>All</Dropdown.Item>
-                    <Dropdown.Item onClick={() => handleTypeChange('movie')}>Movie</Dropdown.Item>
-                    <Dropdown.Item onClick={() => handleTypeChange('series')}>Series</Dropdown.Item>
-                    <Dropdown.Item onClick={() => handleTypeChange('episode')}>Episode</Dropdown.Item>
+                    <Dropdown.Item onClick={() => setMovieType('')}>All</Dropdown.Item>
+                    <Dropdown.Item onClick={() => setMovieType('movie')}>Movie</Dropdown.Item>
+                    <Dropdown.Item onClick={() => setMovieType('series')}>Series</Dropdown.Item>
+                    <Dropdown.Item onClick={() => setMovieType('episode')}>Episode</Dropdown.Item>
                 </DropdownButton>
 
                 <input 
@@ -99,7 +96,7 @@ const Searchfield = ({inputRef}: props) => {
 
             </div>
 
-           { focus ? <FilmInsinuator movies={searchInsinuator} loading={loading} /> : null}
+           { focus ? <FilmInsinuator movies={searchInsinuator}/> : null}
             
             
         </div> 

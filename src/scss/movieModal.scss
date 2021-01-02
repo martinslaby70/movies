@@ -122,7 +122,7 @@ $randomWidth: random(100);
     .modal-footer {
         border: none;
 
-        >button, a {
+        >div>button, a {
             background-color: $background;
             border-color: $text-color;
             margin: 5px;

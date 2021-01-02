@@ -74,7 +74,6 @@
     z-index: 999;
     left: 25%;
     overflow: hidden;
-    transition: all ease-in-out .4s;
     
     svg{
       margin-top: 50px;
@@ -125,7 +124,7 @@
   }
   .insinuator{
     width: 75% !important;
-    left: 12.5%;
+    left: 12.5% !important;
     font-size: 20px;
   }
 }

@@ -27,7 +27,7 @@ const Body = ({movie}: props) => {
             <div className="description">
                 <h2>{movie.Title}</h2>
                 <ul>
-                    <li>Rating: <span>{movie.imdbRating}</span></li>
+                    <li>Rating: <span>{movie.imdbRating} / 10</span></li>
                     <li>Release date: <span>{movie.Year}</span></li>
                     <li>Rated: <span>{movie.Rated}</span></li>
                     <li>Director: <span>{movie.Director}</span></li>
