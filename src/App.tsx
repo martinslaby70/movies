@@ -16,12 +16,12 @@ import Footer from './components/footer';
 
 //          todo
 // pagiantion responsivity
-// movie modal buttons
+
 
 
 const App = () => {
   
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   return (
       <MovieContexProvider>    

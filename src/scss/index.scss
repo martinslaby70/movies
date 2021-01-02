@@ -5,7 +5,7 @@ html, body {
   margin: 0;
   background-color: $background !important;
   overflow-x: hidden;
-  -ms-overflow-style: none;  /* IE and Edge */
+  -ms-overflow-style: none;  
   scrollbar-width: none; 
 
   &::-webkit-scrollbar{
