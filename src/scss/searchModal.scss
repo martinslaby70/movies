@@ -37,13 +37,72 @@
     }
 }
 
-.pages{
-    margin: 0 auto;
-    .tool{
-        background-color: rgba($text-color ,.15) !important;
+.pagination{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+
+    button, span{
+        width: 50px;
+        margin: 3px;
+        height: 50px;
+        border: 2px solid transparent;
+        background-color: transparent;
+        font-size: larger;
+        color: $text-color;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all ease-in-out .15s;
+
+        &.arrow{
+            border-color: $text-color;
+            font-weight: bolder;
+            font-size: larger;
+            &.left{
+                margin-right: 30px;
+            }
+            &.right{
+                margin-left: 30px;
+            }
+        }
+      
+        &.active{
+            color: $text-color;
+            border-color: $text-color;
+        }
+        &:focus:not(.active):not(.dots), 
+        &:hover:not(.active):not(.dots){
+            border: 2px solid $text-color;
+            outline: none;
+            border-radius: 8px;
+        }
+        &:disabled{
+            opacity: .4;
+            cursor: default;
+        }
+        &:last-child{
+            background-color: rgba(109, 24, 24, 0.316);
+            color: red;
+            border-color: red;
+            width: 100%;
+            display: none;
+        }
     }
-    .disabled{
-        cursor: not-allowed !important;
+    .dots{
+        width: 50px;
+        margin: 3px;
+        display: inline;
+        opacity: .8;
+        background-color: transparent;
+        cursor: default;
+        &:hover,
+        &:focus{
+            border-color: transparent ;
+        }
+    }
+    .allResults{
+        color: $text-color
     }
 }
 

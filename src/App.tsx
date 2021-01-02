@@ -14,6 +14,9 @@ import Searchfield from './components/seachfield';
 import Footer from './components/footer';
 
 
+// todo
+// pagiantion responsivity
+// movie modal buttons
 
 
 const App = () => {

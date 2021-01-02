@@ -19,8 +19,10 @@ interface props {
 const MovieModal = ({inputRef}: props) => {
     
     const [movies, setMovies] = useState<Movie[]>([]);
-    const [page, setPage] = useState<number>(1);
+    const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalMovieResults, setTotalMovieResults] = useState<number>(0);
+
+    const itemsPerPage = 10;
 
     //contexts
     const {setMovieId} = useContext(MovieModalContext)!;
@@ -28,16 +30,16 @@ const MovieModal = ({inputRef}: props) => {
     
     useEffect(() => {     
     
-        Axios.get(`https://omdbapi.com/?apikey=${KEY}&s=${modalSearchString}&page=${page.toString()}`)
+        Axios.get(`https://omdbapi.com/?apikey=${KEY}&s=${modalSearchString}&page=${currentPage.toString()}`)
         .then(res => {
           setMovies(res.data.Search);     
           setTotalMovieResults(res.data.totalResults);             
         });   
      
-    },[modalSearchString, page]);
+    },[modalSearchString, currentPage]);
    
     const handleHide = () => {
-      setPage(1);
+      setCurrentPage(1);
       setTotalMovieResults(0);
       hide();
       if (inputRef.current)
@@ -63,7 +65,13 @@ const MovieModal = ({inputRef}: props) => {
         </Modal.Body>
         
         <Modal.Footer>          
-          <Footer page={page} totalResults={totalMovieResults} setPage={setPage} close={handleHide}/>
+          <Footer 
+            setCurrentPage={setCurrentPage} 
+            currentPage={currentPage} 
+            totalItems={totalMovieResults}
+            itemsPerPage={itemsPerPage}
+            close={handleHide}
+          />
         </Modal.Footer>
       </Modal>
     ):(<div />)

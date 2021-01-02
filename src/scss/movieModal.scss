@@ -1,7 +1,9 @@
 @import "./assests/colors.scss";
 
+$randomWidth: random(100);
+
 .modal-content {
-    background-color: rgba($movieBackground, .98) !important;
+    background-color: $background !important;
     color: white;
 
     h2 {
@@ -13,7 +15,7 @@
             display: flex;
             align-items: flex-start;
             justify-content: flex-start;
-            .content-left {
+            .poster {
                 
                 width: 30%;
                 float: left;
@@ -26,7 +28,7 @@
                 }
             }
 
-            .content-right {
+            .description {
                 flex-direction: column;
                 width: 70%;
                 p{
@@ -54,13 +56,73 @@
                 }
             }
         }
+        .preview{
+            .poster>div{
+                width: 207px;
+                padding: 5%;
+                height: 272px;
+                border-radius: 5px;
+                display: block;
+                background: $loadingBackground;
+                background-size: 300% 300%;
+                -webkit-animation: rainbow 5s ease infinite;
+                -z-animation: rainbow 5s ease infinite;
+                -o-animation: rainbow 5s ease infinite;
+                animation: rainbow 5s ease infinite;
+            }
+            .description{
+                div{
+                    border-radius: 5px;
+                    margin-left: 10px;
 
+                    background: $loadingBackground;
+                    background-size: 300% 300%;
+                    -webkit-animation: rainbow 18s ease infinite;
+                    -z-animation: rainbow 18s ease infinite;
+                    -o-animation: rainbow 18s ease infinite;
+                    animation: rainbow 18s ease infinite;
+                }
+                >div{
+                    width: 280px;
+                    height: 38px;
+                } 
+                ul>li
+                {
+                   
+                    @for $i from 1 through 6 {
+                        &:nth-child(#{$i}) { 
+                            div{
+                                width: random(50) + 150 + px;
+                                display: inline-block;
+                                height: 13px;
+                            }
+                        }
+                    }   
+                } 
+                
+                p{
+                    margin-right: 10px;
+                    >div{
+                        
+                        display: inline-block;
+                        height: 13px;
+                        margin-left: 0px;
+                        @for $l from 1 through 15 {
+                            &:nth-child(#{$l}) { 
+                                width: random(100) + 400 + px;
+                            }
+                        } 
+                    }
+                }
+               
+            }
+        }
     }
 
     .modal-footer {
         border: none;
 
-        button, a {
+        >button, a {
             background-color: $background;
             border-color: $text-color;
             margin: 5px;
@@ -102,6 +164,27 @@
 
     }
 }
+@-webkit-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-moz-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-o-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@keyframes rainbow { 
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+ 
 @media only screen and (max-width: 900px) {
     p, li{
         font-size: 12px;

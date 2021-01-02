@@ -1,70 +1,97 @@
 import React from 'react'
-import Button from 'react-bootstrap/Button';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
-import {v4 as uuid} from 'uuid';
-
-interface props {
-    page: number,
-    setPage: (newPage: number) => void,
-    totalResults: number,
-    close: () => void
-}
-const Footer = ({page,setPage,totalResults, close}: props) => {
-
-    const pages = Math.ceil(totalResults / 10);
-    
-    const activeNums = paginate({currentPage:page, totalItems:pages}).map(number => {
-        return(
-            <Button onClick={() => setPage(number)} variant='secondary' className={number === page ? 'num active' : 'num'} key={uuid()}>{number}</Button>
-        );
-    });
-    
-    return(
-        <div className='pages'>
-            <Button className="tool" onClick={() => setPage(1)}>First</Button>
-            <Button className={'tool arrow ' + (page === 1 ? 'disabled' : '')} onClick={() => page !== 1 ? setPage(page - 1) : {}}><FontAwesomeIcon icon={faAngleLeft} /></Button>
-                {activeNums}
-            <Button className={'tool arrow ' + (page === pages ? 'disabled' : '')} onClick={() => page !== pages ? setPage(page + 1) : {}}><FontAwesomeIcon icon={faAngleRight} /></Button>
-            <Button className="tool" onClick={() => setPage(pages)}>Last</Button>
-            <Button onClick={close}>close</Button>
-        </div>
-    )
-}
-
 
 interface paginationProps {
+    setCurrentPage: (newPage: number) => void,
     currentPage: number,
-    totalItems: number
+    totalItems: number,
+    itemsPerPage: number,
+    close: () => void
 }
-const paginate = ({totalItems, currentPage}: paginationProps) :number[] => {
-    let ret: number[] = [];
-    switch (currentPage)   
-    {
-        //first 3
-        case 1:
-        case 2:
-        case 3: {
-            ret = [1,2,3,4,5,6,7];
-            break;
+
+const paginate = ({totalItems, currentPage, setCurrentPage, itemsPerPage, close}: paginationProps) => {
+    
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+   
+
+    if (totalPages <= 1)
+        return(
+            <div className="pagination">
+                <div>
+                    <p className="allResults">Všechny položky zobrazeny ({totalItems})</p>
+                </div>
+            </div>
+        );
+    
+   
+    
+    const Buttons = () => {
+        let ret: (string | number)[] = [];
+       
+        if (totalItems < 7)
+        {
+            for (let i = 1; (i < 7 && i <= totalItems) ; i++) 
+            ret.push(i);    
         }
-        //last 3
-        case totalItems:
-        case totalItems -1:
-        case totalItems -2: {
-            ret = [totalItems - 6,totalItems - 5,totalItems - 4,totalItems - 3,totalItems - 2,totalItems - 1,totalItems]
-            break;
+        switch (currentPage) {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+                ret = [1,2,3,4,5, '...', totalPages];
+                break;
+            case totalPages:
+            case totalPages - 1:
+            case totalPages - 2:
+            case totalPages - 3:
+                ret = [ 1 ,'...' ,totalPages - 4,totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+                break; 
+            default:
+                ret = [currentPage - 1, currentPage, currentPage +1];
+                if (currentPage > 2)
+                    ret = [1 ,"..." , ...ret];
+                if ((totalPages - currentPage) > 2)
+                    ret = [...ret, "...", totalPages];
+                break;
         }
-        default: {
-            ret = [currentPage - 3, currentPage - 2, currentPage - 1, currentPage, currentPage + 1, currentPage + 2, currentPage + 3,];
-            break;
-        }
+
+        const buttonsToDisplay = ret.map(item => {
+            const handleClick = () => {
+                if (item !== '...')
+                    setCurrentPage(Number(item));
+            }
+            
+            return item !== '...' ? (
+                <button 
+                    className={item === currentPage ? 'active num' : 'num'}
+                    onClick={handleClick}
+                    key={item}
+                >
+                {item}
+                </button>
+            ):(
+                <button className="dots" key={Math.random()}>...</button>
+            )
+        });
+
+        return(
+            <>
+                {buttonsToDisplay}
+            </>
+        )
     }
 
-    return ret;
+    return(
+        <div className="pagination">
+            <div>
+                <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1 ? true : false} className="arrow left">&lsaquo;</button>
+                <Buttons />
+                <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages  ? true : false} className="arrow right">&rsaquo;</button>
+                <button onClick={close}>Close</button>
+            </div>
+        </div>
+    )
+  
 }
 
 
-
-export default Footer;
+export default paginate;

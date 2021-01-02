@@ -1,11 +1,10 @@
 import React, {useContext} from 'react'
-
 import Movie from '../interfaces/Movie';
 import unknownMoviePoster from '../imgs/uknownFilm.jpg'
 import { MovieModalContext } from '../contexts/movieModalContext';
-import { v4 as uuid} from 'uuid';
+import { v4 as uuid } from 'uuid';
 
-//libaries
+// FA
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 
