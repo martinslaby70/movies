@@ -12,10 +12,10 @@ interface ModalContextType {
 export const MovieModalContext = createContext<ModalContextType | null>(null);
 
 
-interface Props {
+interface props {
     children: React.ReactNode
 }
-export const MovieModalContexProvider = ({children}: Props) => {
+export const MovieModalContexProvider = ({children}: props) => {
     
    
     const [isVisible, setVisibility] = useState<boolean>(false);

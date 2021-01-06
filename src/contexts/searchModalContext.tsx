@@ -12,10 +12,10 @@ interface ModalContextType {
 export const SearchModalContext = createContext<ModalContextType | null>(null);
 
 
-interface Props {
+interface props {
     children: React.ReactNode
 }
-export const SearchModalContexProvider = ({children}: Props) => {
+export const SearchModalContexProvider = ({children}: props) => {
     
    //search modal setup
     const [isVisible, setVisibility] = useState<boolean>(false);

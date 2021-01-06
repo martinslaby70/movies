@@ -38,7 +38,7 @@ const MovieModal = ({inputRef}: props) => {
       setMovieDescription(null);
       setMovieId('');
       hide();
-      if (inputRef.current)
+      if (inputRef?.current)
         inputRef.current.focus();
     } 
     

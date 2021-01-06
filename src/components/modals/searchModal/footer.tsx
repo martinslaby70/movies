@@ -10,8 +10,7 @@ interface paginationProps {
 
 const paginate = ({totalItems, currentPage, setCurrentPage, itemsPerPage, close}: paginationProps) => {
     
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
-   
+    const totalPages = Math.ceil(totalItems / itemsPerPage); 
 
     if (totalPages <= 1)
         return(
@@ -22,15 +21,13 @@ const paginate = ({totalItems, currentPage, setCurrentPage, itemsPerPage, close}
             </div>
         );
     
-   
-    
     const Buttons = () => {
-        let ret: (string | number)[] = [];
+        let ret: ('...' | number)[] = [];
        
-        if (totalItems < 7)
+        if (totalPages < 7)
         {
-            for (let i = 1; (i < 7 && i <= totalItems) ; i++) 
-            ret.push(i);    
+            for (let i = 1; (i < 7 && i <= totalPages) ; i++) 
+                ret.push(i);    
         }
         switch (currentPage) {
             case 1:
@@ -69,7 +66,7 @@ const paginate = ({totalItems, currentPage, setCurrentPage, itemsPerPage, close}
                 {item}
                 </button>
             ):(
-                <button className="dots" key={Math.random()}>...</button>
+                <button className="dots" key={Math.random()} disabled>...</button>
             )
         });
 

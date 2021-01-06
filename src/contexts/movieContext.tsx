@@ -13,10 +13,10 @@ export const MovieContext = createContext<MovieContextType | null>(null);
 
 
 
-interface Props {
+interface props {
     children: React.ReactNode
 }
-export const MovieContexProvider = ({children}: Props) => {
+export const MovieContexProvider = ({children}: props) => {
     
     const defaultValue = () => {
         const values: movieDescription[] = [];

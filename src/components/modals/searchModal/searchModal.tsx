@@ -42,7 +42,7 @@ const MovieModal = ({inputRef}: props) => {
       setCurrentPage(1);
       setTotalMovieResults(0);
       hide();
-      if (inputRef.current)
+      if (inputRef?.current)
         inputRef.current.focus();
     }
 

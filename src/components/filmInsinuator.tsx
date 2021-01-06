@@ -14,7 +14,6 @@ const FilmResult = ({movies}: props) => {
 
     const results = movies.slice(0, numberOfSearchResults).map(movie => <Film movie={movie}/>);
     
-   
     return (
         <div className='insinuator'>
             {results}
