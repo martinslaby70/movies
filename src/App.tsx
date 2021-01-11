@@ -1,4 +1,5 @@
 import React, {useRef} from 'react';
+import { LazyLoadComponent } from 'react-lazy-load-image-component';
 
 //contexts
 import {MovieContexProvider} from './contexts/movieContext';
@@ -27,8 +28,11 @@ const App = () => {
               <Navbar />
 
               <Searchfield inputRef={inputRef}/>
-              <MovieList  />
 
+              <LazyLoadComponent> 
+                <MovieList  />
+              </LazyLoadComponent>
+              
               <MovieModal inputRef={inputRef} />
               <SearchModal inputRef={inputRef} /> 
             </div>
