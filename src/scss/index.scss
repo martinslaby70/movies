@@ -4,24 +4,20 @@ html, body {
   scroll-behavior: smooth;
   margin: 0;
   background-color: $background !important;
-  overflow-x: hidden;
-  -ms-overflow-style: none;  
-  scrollbar-width: none; 
-
+  overflow-x: hidden; 
+  height: 100vh;
   &::-webkit-scrollbar{
     display: none;
   }
 }
 
+.wrapper{
+  min-height: 100vh;
+}
 
 header {
   width: 100vw;
   height: 80px;  
-  display: block;
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: linear-gradient(black, colors 100%);
 
   a{
     padding: 15px;
@@ -39,10 +35,9 @@ header {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-
-  position: absolute;
-  bottom: -45px;
-  left: 0;
+  z-index: 1;
+  
+  
 
   p, a {
     margin: 0;

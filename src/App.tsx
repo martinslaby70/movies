@@ -22,15 +22,17 @@ const App = () => {
       <MovieContexProvider>    
         <MovieModalContexProvider>   
           <SearchModalContexProvider>
-             
-            <Navbar />
+            
+            <div className="wrapper">
+              <Navbar />
 
-            <Searchfield inputRef={inputRef}/>
-            <MovieList  />
+              <Searchfield inputRef={inputRef}/>
+              <MovieList  />
 
-            <MovieModal inputRef={inputRef} />
-            <SearchModal inputRef={inputRef} /> 
-
+              <MovieModal inputRef={inputRef} />
+              <SearchModal inputRef={inputRef} /> 
+            </div>
+           
             <Footer />
 
           </SearchModalContexProvider>
